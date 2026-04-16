@@ -1,0 +1,250 @@
+:root {
+  --bg: #f4f7f1;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-border: rgba(15, 23, 42, 0.08);
+  --text: #17301f;
+  --muted: #5f7365;
+  --green: #1f9d55;
+  --yellow: #c68b10;
+  --red: #d64545;
+  --shadow: 0 24px 50px rgba(27, 50, 34, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(89, 175, 110, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(240, 178, 96, 0.2), transparent 28%),
+    linear-gradient(180deg, #fbfcf8 0%, var(--bg) 100%);
+}
+
+.app-shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--green);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 0.95;
+  max-width: 720px;
+}
+
+.subtitle,
+.hint,
+.patient-meta,
+.block-meta {
+  color: var(--muted);
+}
+
+.refresh-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(31, 157, 85, 0.45);
+  animation: pulse 2s infinite;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 28px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.metrics-panel,
+.alerts-panel {
+  grid-column: span 4;
+}
+
+.chart-panel,
+.logs-panel {
+  grid-column: span 8;
+}
+
+.panel-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panel-title-row h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.metric-card {
+  background: linear-gradient(180deg, rgba(245, 250, 246, 0.95), rgba(233, 243, 235, 0.95));
+  border-radius: 22px;
+  padding: 18px;
+  min-height: 140px;
+}
+
+.metric-card p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.metric-card h3 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.status-badge,
+.alert-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.status-badge.normal,
+.alert-pill.normal {
+  background: rgba(31, 157, 85, 0.14);
+  color: var(--green);
+}
+
+.status-badge.alert,
+.alert-pill.alert {
+  background: rgba(214, 69, 69, 0.14);
+  color: var(--red);
+}
+
+.status-badge.warning,
+.alert-pill.warning,
+.status-badge.neutral {
+  background: rgba(198, 139, 16, 0.14);
+  color: var(--yellow);
+}
+
+.alerts-list,
+.blockchain-list {
+  display: grid;
+  gap: 12px;
+}
+
+.alert-item,
+.block-item {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.alert-item strong,
+.block-item strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.block-hash {
+  font-family: monospace;
+  font-size: 0.84rem;
+  color: #355243;
+  word-break: break-all;
+}
+
+.empty-state {
+  color: var(--muted);
+  padding: 8px 0;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: linear-gradient(180deg, rgba(245, 250, 246, 0.9), rgba(252, 253, 249, 0.9));
+  border-radius: 22px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(31, 157, 85, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(31, 157, 85, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(31, 157, 85, 0);
+  }
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .panel-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metrics-panel,
+  .alerts-panel,
+  .chart-panel,
+  .logs-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 20px, 1200px);
+    padding-top: 20px;
+  }
+
+  .metric-cards {
+    grid-template-columns: 1fr;
+  }
+}

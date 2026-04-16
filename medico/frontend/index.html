@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Healthcare Monitoring Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">IoT + AI + Blockchain</p>
+          <h1>Smart Healthcare Monitoring System</h1>
+          <p class="subtitle">
+            Live patient vitals streaming from ESP32 with risk detection and tamper-evident logs.
+          </p>
+        </div>
+        <div class="refresh-pill">
+          <span class="pulse-dot"></span>
+          <span id="lastUpdated">Waiting for data...</span>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel metrics-panel">
+          <div class="panel-title-row">
+            <h2>Live Vitals</h2>
+            <span id="statusBadge" class="status-badge neutral">No Data</span>
+          </div>
+          <div class="metric-cards">
+            <article class="metric-card">
+              <p>Temperature</p>
+              <h3><span id="temperatureValue">--</span> <small>C</small></h3>
+            </article>
+            <article class="metric-card">
+              <p>Heart Rate</p>
+              <h3><span id="heartRateValue">--</span> <small>bpm</small></h3>
+            </article>
+          </div>
+          <div class="patient-meta" id="patientMeta">No patient stream detected yet.</div>
+        </section>
+
+        <section class="panel chart-panel">
+          <div class="panel-title-row">
+            <h2>Vitals Trend</h2>
+            <span class="hint">Last 20 readings</span>
+          </div>
+          <canvas id="historyChart" width="900" height="320"></canvas>
+        </section>
+
+        <section class="panel alerts-panel">
+          <div class="panel-title-row">
+            <h2>AI Assessment</h2>
+            <span class="hint">Rule-based inference</span>
+          </div>
+          <div id="alertsList" class="alerts-list">
+            <div class="empty-state">Awaiting analysis...</div>
+          </div>
+        </section>
+
+        <section class="panel logs-panel">
+          <div class="panel-title-row">
+            <h2>Blockchain Logs</h2>
+            <span id="chainState" class="hint">Validating...</span>
+          </div>
+          <div id="blockchainLogs" class="blockchain-list">
+            <div class="empty-state">No blocks yet.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
