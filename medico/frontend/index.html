@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medico AI | Smart Healthcare Monitoring System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <div class="background-grid"></div>
+
+    <div class="app-shell">
+      <aside class="sidebar glass">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div>
+            <p class="brand-kicker">Health Intelligence</p>
+            <h1>Medico AI</h1>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <button class="nav-item active" data-tab="dashboard">
+            <span class="nav-icon">◫</span>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-tab="monitoring">
+            <span class="nav-icon">◉</span>
+            <span>Live Monitoring</span>
+          </button>
+          <button class="nav-item" data-tab="ai-analysis">
+            <span class="nav-icon">✦</span>
+            <span>AI Analysis</span>
+          </button>
+          <button class="nav-item" data-tab="blockchain">
+            <span class="nav-icon">⛁</span>
+            <span>Blockchain Logs</span>
+          </button>
+          <button class="nav-item" data-tab="security">
+            <span class="nav-icon">▣</span>
+            <span>Security</span>
+          </button>
+        </nav>
+
+        <section class="sidebar-card glass-soft">
+          <p class="section-label">System Signal</p>
+          <div class="sidebar-metric">
+            <span class="signal-dot" id="sidebarSignal"></span>
+            <strong id="sidebarSignalText">Initializing live stream</strong>
+          </div>
+          <p class="muted">ESP32, AI engine, and tamper-proof logs synchronized in one flow.</p>
+        </section>
+
+        <section class="sidebar-card glass-soft">
+          <p class="section-label">Demo Highlights</p>
+          <ul class="sidebar-list">
+            <li>IoT vitals from ESP32 sensors</li>
+            <li>AI triage with instant risk labels</li>
+            <li>Blockchain-backed audit trail</li>
+            <li>Security posture monitoring</li>
+          </ul>
+        </section>
+      </aside>
+
+      <div class="content-area">
+        <header class="topbar glass">
+          <div>
+            <p class="section-label" id="pageEyebrow">Overview</p>
+            <h2 id="pageTitle">Smart Healthcare Monitoring Dashboard</h2>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="topbar-pill">
+              <span class="status-dot" id="headerStatusDot"></span>
+              <span id="headerStatusText">Offline</span>
+            </div>
+            <div class="topbar-pill">
+              <span>Last updated</span>
+              <strong id="lastUpdated">Waiting for data</strong>
+            </div>
+            <div class="profile-pill">
+              <div class="profile-avatar">KA</div>
+              <div>
+                <strong>Care Ops</strong>
+                <span class="muted">Admin</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="tab-stage">
+          <section class="tab-panel active" id="tab-dashboard">
+            <div class="hero-banner glass">
+              <div>
+                <p class="section-label">Connected Intelligence Layer</p>
+                <h3>Clinical-grade visibility for real-time patient monitoring.</h3>
+                <p class="muted">
+                  A single command center for IoT telemetry, AI inference, blockchain auditability,
+                  and API security posture.
+                </p>
+              </div>
+              <div class="hero-banner-stats">
+                <div class="mini-stat">
+                  <span>Patient</span>
+                  <strong id="heroPatient">patient-001</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Device</span>
+                  <strong id="heroDevice">esp32-room-1</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="summary-grid">
+              <article class="metric-card glass interactive">
+                <div class="metric-label">Temperature</div>
+                <div class="metric-value" id="temperatureValue">--.-</div>
+                <div class="metric-foot">Stable thermal reading</div>
+              </article>
+              <article class="metric-card glass interactive">
+                <div class="metric-label">Heart Rate</div>
+                <div class="metric-value" id="heartRateValue">---</div>
+                <div class="metric-foot">Live bpm telemetry</div>
+              </article>
+              <article class="metric-card glass interactive">
+                <div class="metric-label">Current Status</div>
+                <div class="metric-value status-display">
+                  <span class="status-badge neutral" id="statusBadge">No Data</span>
+                </div>
+                <div class="metric-foot" id="statusDetail">Awaiting live input</div>
+              </article>
+              <article class="metric-card glass interactive">
+                <div class="metric-label">Device ID</div>
+                <div class="metric-value small" id="deviceValue">--</div>
+                <div class="metric-foot" id="patientMeta">No patient stream detected yet</div>
+              </article>
+            </div>
+
+            <div class="dashboard-grid">
+              <section class="panel chart-panel glass">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Trendline</p>
+                    <h3>Vitals History</h3>
+                  </div>
+                  <span class="chip">Last 20 readings</span>
+                </div>
+                <div class="chart-wrap">
+                  <canvas id="historyChart" width="1100" height="360"></canvas>
+                </div>
+              </section>
+
+              <section class="panel glass">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Activity</p>
+                    <h3>System Feed</h3>
+                  </div>
+                </div>
+                <div class="feed-list" id="activityFeed"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="tab-monitoring">
+            <div class="monitor-grid">
+              <section class="panel glass monitoring-main">
+                <div class="monitoring-head">
+                  <div>
+                    <p class="section-label">Live Vitals</p>
+                    <h3>Realtime Patient Stream</h3>
+                  </div>
+                  <div class="live-indicator">
+                    <span class="signal-dot live"></span>
+                    <span>Live pulse</span>
+                  </div>
+                </div>
+                <div class="monitoring-values">
+                  <div class="vital-display temp">
+                    <span>Temperature</span>
+                    <strong id="monitorTemperature">--.-</strong>
+                    <small>Celsius</small>
+                  </div>
+                  <div class="vital-display pulse">
+                    <span>Heart Rate</span>
+                    <strong id="monitorHeartRate">---</strong>
+                    <small>bpm</small>
+                  </div>
+                </div>
+                <div class="chart-wrap">
+                  <canvas id="liveChart" width="1100" height="320"></canvas>
+                </div>
+              </section>
+
+              <section class="monitor-side">
+                <article class="panel glass">
+                  <div class="panel-header">
+                    <div>
+                      <p class="section-label">Patient</p>
+                      <h3>Profile Snapshot</h3>
+                    </div>
+                  </div>
+                  <div class="profile-card">
+                    <div class="profile-avatar large">P1</div>
+                    <div>
+                      <strong id="monitorPatient">patient-001</strong>
+                      <p class="muted" id="monitorDevice">esp32-room-1</p>
+                    </div>
+                  </div>
+                  <div class="meta-grid">
+                    <div>
+                      <span class="meta-label">Monitoring Mode</span>
+                      <strong>Continuous</strong>
+                    </div>
+                    <div>
+                      <span class="meta-label">Alert Routing</span>
+                      <strong>Enabled</strong>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="panel glass">
+                  <div class="panel-header">
+                    <div>
+                      <p class="section-label">Telemetry</p>
+                      <h3>Current Session</h3>
+                    </div>
+                  </div>
+                  <div class="session-list" id="sessionStats"></div>
+                </article>
+              </section>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="tab-ai-analysis">
+            <div class="analysis-grid">
+              <section class="panel glass">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">AI Triage</p>
+                    <h3>Risk Alert Cards</h3>
+                  </div>
+                </div>
+                <div class="alert-grid" id="alertsGrid"></div>
+              </section>
+
+              <section class="panel glass">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Inference</p>
+                    <h3>Explanation Engine</h3>
+                  </div>
+                </div>
+                <div class="explanation-card" id="explanationPanel"></div>
+              </section>
+
+              <section class="panel glass timeline-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">History</p>
+                    <h3>Alert Timeline</h3>
+                  </div>
+                </div>
+                <div class="timeline" id="alertTimeline"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="tab-blockchain">
+            <div class="panel glass chain-summary">
+              <div>
+                <p class="section-label">Integrity Layer</p>
+                <h3>Blockchain Audit Trail</h3>
+              </div>
+              <span class="status-badge neutral" id="chainState">Validating</span>
+            </div>
+            <div class="blockchain-grid" id="blockchainLogs"></div>
+          </section>
+
+          <section class="tab-panel" id="tab-security">
+            <div class="security-grid">
+              <article class="panel glass security-card">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Authentication</p>
+                    <h3>API Key Status</h3>
+                  </div>
+                  <span class="status-badge normal" id="apiKeyStatus">Protected</span>
+                </div>
+                <p class="muted">Incoming telemetry is validated against a required API key header.</p>
+              </article>
+
+              <article class="panel glass security-card">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Encryption</p>
+                    <h3>Payload Protection</h3>
+                  </div>
+                  <span class="status-badge warning" id="encryptionStatus">Simulated Encryption</span>
+                </div>
+                <p class="muted">Sensitive payloads are encoded for demo-safe secure storage visualization.</p>
+              </article>
+
+              <article class="panel glass security-card">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Auth Layer</p>
+                    <h3>Access Monitor</h3>
+                  </div>
+                  <span class="status-badge normal" id="authIndicator">Authenticated</span>
+                </div>
+                <p class="muted">Backend access policies are enforced before sensor data is processed.</p>
+              </article>
+
+              <section class="panel glass security-toggles">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Controls</p>
+                    <h3>Security Toggles</h3>
+                  </div>
+                </div>
+                <div class="toggle-list">
+                  <label class="toggle-item">
+                    <span>Strict API validation</span>
+                    <input type="checkbox" checked />
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <label class="toggle-item">
+                    <span>Alert on anomalous traffic</span>
+                    <input type="checkbox" checked />
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <label class="toggle-item">
+                    <span>Encrypt archived payloads</span>
+                    <input type="checkbox" checked />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </section>
+
+              <section class="panel glass security-table-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="section-label">Logs</p>
+                    <h3>Request Activity</h3>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="request-table">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                        <th>Source</th>
+                      </tr>
+                    </thead>
+                    <tbody id="requestLogs"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
